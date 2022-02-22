@@ -12,8 +12,8 @@ var scores;
 var roundScore;
 
 // Шооны зургийг үзүүлэх элементийг DOM-оос хайж олоод энд хадгалъя
-var diceDom = document.querySelector(".dice");
-
+var diceDom1 = document.querySelector(".dice1");
+var diceDom2 = document.querySelector(".dice2");
 // Тоглоомыг эхлүүлнэ.
 initGame();
 
@@ -49,25 +49,27 @@ function initGame() {
 
   document.querySelector(".player-0-panel").classList.add("active");
 
-  diceDom.style.display = "none";
+  diceDom1.style.display = "none";
+  diceDom2.style.display = "none";
 }
 
 // Шоог шидэх эвент листенер
 document.querySelector(".btn-roll").addEventListener("click", function() {
   if (isNewGame) {
     // 1 - 6 доторх санамсаргүй нэг тоо гаргаж авна
-    var diceNumber = Math.floor(Math.random() * 6) + 1;
-
+    var diceNumber1 = Math.floor(Math.random() * 6) + 1;
+    var diceNumber2 = Math.floor(Math.random() * 6) + 1;
     // Шооны зургийг вэб дээр гаргаж ирнэ.
-    diceDom.style.display = "block";
-
+    diceDom1.style.display = "block";
+    diceDom2.style.display = "block";
     // Буусан санамсаргүй тоонд харгалзах шооны зургийг вэб дээр гаргаж ирнэ.
-    diceDom.src = "dice-" + diceNumber + ".png";
-
+    diceDom1.src = "dice-" + diceNumber1 + ".png";
+    diceDom2.src = "dice-" + diceNumber2 + ".png";
     // Буусан тоо нь 1 ээс ялгаатай бол идэвхтэй тоглогчийн ээлжийн оноог нэмэгдүүлнэ.
-    if (diceNumber !== 1) {
+    if (diceNumber1 !== 1 && diceNumber2 !== 1) {
       // 1-ээс ялгаатай тоо буулаа. Буусан тоог тоглогчид нэмж өгнө
-      roundScore = roundScore + diceNumber;
+      roundScore = roundScore + diceNumber1 + diceNumber2;
+     
       document.getElementById(
         "current-" + activePlayer
       ).textContent = roundScore;
@@ -123,7 +125,7 @@ function switchToNextPlayer() {
   document.querySelector(".player-1-panel").classList.toggle("active");
 
   // Шоог түр алга болгоно.
-  diceDom.style.display = "none";
+ 
 }
 
 // New Game буюу Шинэ тоглоом эхлүүлэх товчний эвент листенер
